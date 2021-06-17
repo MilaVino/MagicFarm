@@ -12,7 +12,6 @@ screen.bgpic('Background.png')
 def write_coordinates(X:int, Y:int):
     print(X, Y)
 
-
 screen.onclick(write_coordinates)
 
 #mainloop - должен быть последним!
