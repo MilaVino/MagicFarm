@@ -1,8 +1,8 @@
 # Здесь список из кортежей - каждый элемент хранит координаты каких-то объектов.
 import turtle
 
-hole_list_upper_left = [(-63.0, 274.0), (-254.0, 200.0), (-191.0, 211.0), (-219.0, 169.0), (-259.0, 133.0), (-222.0, 113.0),
-             (-255.0, 56.0)]
+hole_list_upper_left_coordinates = [(-281.0, 92.0), (-254.0, 200.0), (-191.0, 211.0), (-219.0, 169.0), (-259.0, 133.0), (-222.0, 113.0),
+                                    (-255.0, 56.0)]
 
 hole_list_bottom_left = [(-33.0, 305.0),
 (-332.0, -99.0),
@@ -22,13 +22,26 @@ hole_list_bottom_left = [(-33.0, 305.0),
 
 hole_list_right = [(-5.0, 54.0), (67.0, 89.0), (116.0, 90.0)]
 
+#Лунка имеет следующие характеристики:
+# - Политость (цвет)
+# - Удобренность (размер)
+# - Степень атакованности сорняками (объекты сорняки недалеко от лунки)
 
 class Hole(turtle.Turtle):
-    def __init__(self, x, y, color):
+    def __init__(self, x, y):
         super(Hole, self).__init__()
         self.penup()
         self.setposition(x, y)
         self.shape("circle")
-        self.color(color)
+        self.color("black")
 
+    def water(self, value):
+        self.color(0, 0, value)
 
+#создаём лунки
+hole_list_upper_left = []
+
+for hole in hole_list_upper_left_coordinates:
+    hole_list_upper_left.append(Hole(hole[0],hole[1]))
+
+hole_list_upper_left[len(hole_list_upper_left)-1].water()

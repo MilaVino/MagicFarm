@@ -5,31 +5,22 @@
 
 # Game Starts here
 import turtle
-import objects
 
 screen = turtle.Screen()
 screen.screensize(800, 555)
 screen.bgpic('Background.png')
+screen.colormode(255)
+
+import objects
 
 def write_coordinates(X:int, Y:int):
     print((X, Y))
 
 screen.onclick(write_coordinates)
-#создаём лунки
-hole_list_upper_left = []
-
-for hole in objects.hole_list_upper_left:
-    hole_list_upper_left.append(objects.Hole(hole[0],hole[1],"red"))
-
-
-
-
-
 
 
 #mainloop - должен быть последним!
 screen.mainloop()
-
 
 #screen.listen()
 #turtle_tom = TurtleParent(pos_x=-60, pos_y=-60, t_color="grey")
