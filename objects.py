@@ -45,12 +45,31 @@ class Hole(turtle.Turtle):
         self.shape("circle")
         self.color("black")
         self.watered_degree = 0
+        self.manure_degree = 0
 
-#метод для поливки лунки (один вызов метода +10%)
+    #метод для поливки лунки (один вызов метода +10%)
     def water(self):
         #Здесь надо сделать проверку на текущее значение <10 - иначе ничего не поливаем
-        self.watered_degree += 1
-        self.color(0, 0, self.watered_degree * 25)
+        if self.watered_degree < 10 :
+            self.watered_degree += 1
+            self.color(0, 0, self.watered_degree * 25)
+
+
+    #метод для высушивания лунки (один вызов метода -10%)
+    def dehydrate(self):
+        #Здесь надо сделать проверку на текущее значение <10 - иначе ничего не поливаем
+        if self.watered_degree > 0 :
+            self.watered_degree -= 1
+            self.color(0, 0, self.watered_degree * 25)
+
+    #метод для удобрения лунки (один вызов метода +1)
+    def fertilize(self):
+        #Здесь удобрение
+        #для лунки будет свойство - список привязанных удобрений
+        #в этот список будем добавлять новые объекты (удобрять)
+        if self.manure_degree < 4 :
+            self.manure_degree += 1
+            self.color(0, 0, self.manure_degree)
 
 #создаём лунки
 hole_list_upper_left = []
@@ -61,4 +80,9 @@ for hole in hole_list_upper_left_coordinates:
 for i in range(0,15):
     for hole in hole_list_upper_left:
         hole.water()
+        time.sleep(0.05)
+
+for i in range(0,15):
+    for hole in hole_list_upper_left:
+        hole.dehydrate()
         time.sleep(0.05)
