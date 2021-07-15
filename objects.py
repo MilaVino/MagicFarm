@@ -71,6 +71,14 @@ class Hole(turtle.Turtle):
             self.manure_degree += 1
             self.color(0, 0, self.manure_degree)
 
+class Fertilizer(Hole):
+    def __init__(self, x, y):
+        super(Hole, self).__init__()
+        self.setposition(x+20, y)
+        self.shape("triangle")
+        self.color("brown")
+        self.manure_degree = 0
+
 #создаём лунки
 hole_list_upper_left = []
 
