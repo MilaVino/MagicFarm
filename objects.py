@@ -44,6 +44,7 @@ class Hole(turtle.Turtle):
         self.setposition(x, y)
         self.shape("circle")
         self.color("black")
+        #self.pencolor("brown")
         self.watered_degree = 0
         self.manure_degree = 0
 
@@ -53,7 +54,7 @@ class Hole(turtle.Turtle):
         if self.watered_degree < 10 :
             self.watered_degree += 1
             self.color(0, 0, self.watered_degree * 25)
-
+            self.pencolor("brown")
 
     #метод для высушивания лунки (один вызов метода -10%)
     def dehydrate(self):
@@ -67,17 +68,11 @@ class Hole(turtle.Turtle):
         #Здесь удобрение
         #для лунки будет свойство - список привязанных удобрений
         #в этот список будем добавлять новые объекты (удобрять)
-        if self.manure_degree < 4 :
+        if self.manure_degree < 3 :
             self.manure_degree += 1
-            self.color(0, 0, self.manure_degree)
+            self.shapesize(outline = float(self.manure_degree * 2))
 
-class Fertilizer(Hole):
-    def __init__(self, x, y):
-        super(Hole, self).__init__()
-        self.setposition(x+20, y)
-        self.shape("triangle")
-        self.color("brown")
-        self.manure_degree = 0
+
 
 #создаём лунки
 hole_list_upper_left = []
@@ -92,5 +87,5 @@ for i in range(0,15):
 
 for i in range(0,15):
     for hole in hole_list_upper_left:
-        hole.dehydrate()
+        hole.fertilize()
         time.sleep(0.05)
