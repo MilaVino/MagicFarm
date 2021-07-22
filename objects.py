@@ -94,7 +94,7 @@ class Carrot(Plant):
     def __init__(self):
         super(Carrot, self).__init__()
         self.register_shape("carrot.gif") #несмотря на пример из help, не заработало - класс не знает такого метода
-        self.shape("carrot.gif") #это, наверное тоже не работает
+        self.shape("carrot.gif") #это, наверное тоже не работает - надо разбираться
 
 #создаём лунки
 hole_list_upper_left = []
