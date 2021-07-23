@@ -2,6 +2,11 @@
 import turtle
 import time
 
+screen = turtle.Screen()
+screen.screensize(800, 555)
+screen.bgpic('Background.png')
+screen.colormode(255)
+
 hole_list_upper_left_coordinates = [(-281.0, 92.0), (-254.0, 200.0), (-191.0, 211.0), (-219.0, 169.0), (-259.0, 133.0), (-222.0, 113.0),
                                     (-255.0, 56.0)]
 
@@ -84,6 +89,7 @@ class Plant(turtle.Turtle):
     def __init__(self):
         super(Plant, self).__init__()
         self.penup()
+        self.screen = screen
         self.hole: Hole
         self.ripeness = 0       #Спелость - от 0 до 5
         self.water_consume = 0  #Скорость поглощения воды
@@ -93,28 +99,30 @@ class Plant(turtle.Turtle):
 class Carrot(Plant):
     def __init__(self):
         super(Carrot, self).__init__()
-        self.register_shape("carrot.gif") #несмотря на пример из help, не заработало - класс не знает такого метода
+        self.screen.register_shape("carrot.gif") #несмотря на пример из help, не заработало - класс не знает такого метода
         self.shape("carrot.gif") #это, наверное тоже не работает - надо разбираться
-
+print("test carrot")
 #создаём лунки
 hole_list_upper_left = []
 
 for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
 
-for i in range(0,15):
-    for hole in hole_list_upper_left:
-        hole.water()
-        time.sleep(0.05)
+carrot1 = Carrot()
+# for i in range(0,15):
+#     for hole in hole_list_upper_left:
+#         hole.water()
+#         time.sleep(0.05)
+#
+# for i in range(0,15):
+#     for hole in hole_list_upper_left:
+#         hole.fertilize()
+#         time.sleep(0.05)
+#
+# for i in range(0,15):
+#     for hole in hole_list_upper_left:
+#         hole.defertilize()
+#         time.sleep(0.05)
 
-for i in range(0,15):
-    for hole in hole_list_upper_left:
-        hole.fertilize()
-        time.sleep(0.05)
 
-for i in range(0,15):
-    for hole in hole_list_upper_left:
-        hole.defertilize()
-        time.sleep(0.05)
-
-
+screen.mainloop()

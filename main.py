@@ -6,21 +6,21 @@
 # Game Starts here
 import turtle
 
-screen = turtle.Screen()
-screen.screensize(800, 555)
-screen.bgpic('Background.png')
-screen.colormode(255)
+#screen = turtle.Screen()
+#screen.screensize(800, 555)
+#screen.bgpic('Background.png')
+#screen.colormode(255)
 
 import objects
 
 def write_coordinates(X:int, Y:int):
     print((X, Y))
 
-screen.onclick(write_coordinates)
+#screen.onclick(write_coordinates)
 
 
 #mainloop - должен быть последним!
-screen.mainloop()
+#screen.mainloop()
 
 #screen.listen()
 #turtle_tom = TurtleParent(pos_x=-60, pos_y=-60, t_color="grey")
