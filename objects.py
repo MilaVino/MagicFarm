@@ -52,6 +52,7 @@ class Hole(turtle.Turtle):
         #self.pencolor("brown")
         self.watered_degree = 0
         self.manure_degree = 0
+        self.plant = None
 
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
@@ -84,6 +85,10 @@ class Hole(turtle.Turtle):
             self.manure_degree -= 1
             self.shapesize(outline = float(self.manure_degree * 2))
 
+    def plant_plant(self, picked_plant):
+        """Метод для посадки растения"""
+        self.plant = picked_plant
+        self.plant.setposition(self.position())
 
 class Plant(turtle.Turtle):
     def __init__(self):
@@ -99,9 +104,15 @@ class Plant(turtle.Turtle):
 class Carrot(Plant):
     def __init__(self):
         super(Carrot, self).__init__()
-        self.screen.register_shape("carrot.gif") #несмотря на пример из help, не заработало - класс не знает такого метода
-        self.shape("carrot.gif") #это, наверное тоже не работает - надо разбираться
-print("test carrot")
+        self.screen.register_shape("carrot.gif")
+        self.shape("carrot.gif")
+        self.water_consume = 20
+        self.manure_consume = 10
+        self.edibility = True
+
+#Todo: Индикация состояния спелости растения
+
+
 #создаём лунки
 hole_list_upper_left = []
 
@@ -109,6 +120,8 @@ for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
 
 carrot1 = Carrot()
+hole_list_upper_left[4].plant_plant(carrot1)
+
 # for i in range(0,15):
 #     for hole in hole_list_upper_left:
 #         hole.water()
