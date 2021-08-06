@@ -133,10 +133,11 @@ for hole in hole_list_upper_left_coordinates:
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
+time.sleep(3)
 carrot1.grow_plant()
-time.sleep(1)
+time.sleep(3)
 carrot1.grow_plant()
-time.sleep(1)
+time.sleep(3)
 carrot1.grow_plant()
 time.sleep(1)
 # for i in range(0,15):
