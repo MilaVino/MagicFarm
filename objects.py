@@ -96,21 +96,32 @@ class Plant(turtle.Turtle):
         self.penup()
         self.screen = screen
         self.hole: Hole
-        self.ripeness = 0       #Спелость - от 0 до 5
+        self.ripeness = 0       #Спелость - от 0 до 2
         self.water_consume = 0  #Скорость поглощения воды
         self.manure_consume = 0 #Скорость поглощения удобрений
         self.edibility: bool    #Съедобность
 
+    # Todo: Индикация состояния роста растения
+    def grow_plant(self):
+        if self.ripeness < 2:
+            self.ripeness += 1
+            self.shape(self.shape_type[self.ripeness])
+
+
 class Carrot(Plant):
+    shape_type = ("carrot_g0.gif", "carrot_g1.gif", "carrot_g2.gif")
     def __init__(self):
         super(Carrot, self).__init__()
-        self.screen.register_shape("carrot.gif")
-        self.shape("carrot.gif")
+        for item in self.shape_type: self.screen.register_shape(item)
+        #self.screen.register_shape("carrot_g0.gif")
+        #self.screen.register_shape("carrot_g1.gif")
+        #self.screen.register_shape("carrot_g2.gif")
+        self.shape(self.shape_type[0])
         self.water_consume = 20
         self.manure_consume = 10
         self.edibility = True
 
-#Todo: Индикация состояния спелости растения
+
 
 
 #создаём лунки
@@ -122,6 +133,12 @@ for hole in hole_list_upper_left_coordinates:
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
+carrot1.grow_plant()
+time.sleep(1)
+carrot1.grow_plant()
+time.sleep(1)
+carrot1.grow_plant()
+time.sleep(1)
 # for i in range(0,15):
 #     for hole in hole_list_upper_left:
 #         hole.water()
