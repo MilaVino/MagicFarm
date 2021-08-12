@@ -90,6 +90,12 @@ class Hole(turtle.Turtle):
         self.plant = picked_plant
         self.plant.setposition(self.position())
 
+    def clean_hole(self):
+        """Очистка лунки"""
+        #del self.plant
+        #self.plant = None
+        print("test")
+
 class Plant(turtle.Turtle):
     def __init__(self):
         super(Plant, self).__init__()
@@ -107,6 +113,10 @@ class Plant(turtle.Turtle):
             self.ripeness += 1
             self.shape(self.shape_type[self.ripeness])
 
+    def reap_plant(self):
+        del self
+        """Нужно увеличить счётчик растения на единицу, если степень созревания 2"""
+        #pass
 
 class Carrot(Plant):
     shape_type = ("carrot_g0.gif", "carrot_g1.gif", "carrot_g2.gif")
@@ -133,13 +143,17 @@ for hole in hole_list_upper_left_coordinates:
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
-time.sleep(3)
+time.sleep(2)
 carrot1.grow_plant()
-time.sleep(3)
+time.sleep(2)
 carrot1.grow_plant()
-time.sleep(3)
+time.sleep(2)
 carrot1.grow_plant()
-time.sleep(1)
+time.sleep(2)
+
+carrot1.reap_plant()
+#hole_list_upper_left[4].clean_hole()
+
 # for i in range(0,15):
 #     for hole in hole_list_upper_left:
 #         hole.water()
