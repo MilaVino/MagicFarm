@@ -114,6 +114,8 @@ class Plant(turtle.Turtle):
             self.shape(self.shape_type[self.ripeness])
 
     def reap_plant(self):
+        self.clear()
+        self.hideturtle()
         del self
         """Нужно увеличить счётчик растения на единицу, если степень созревания 2"""
         #pass
