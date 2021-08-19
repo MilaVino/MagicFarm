@@ -57,7 +57,7 @@ class Hole(turtle.Turtle):
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
         #Здесь надо сделать проверку на текущее значение <10 - иначе ничего не поливаем
-        if self.watered_degree < 10 :
+        if self.watered_degree < 10:
             self.watered_degree += 1
             self.color(0, 0, self.watered_degree * 25)
             self.pencolor("brown")
@@ -103,13 +103,17 @@ class Plant(turtle.Turtle):
         self.screen = screen
         self.hole: Hole
         self.ripeness = 0       #Спелость - от 0 до 2
-        self.water_consume = 0  #Скорость поглощения воды
-        self.manure_consume = 0 #Скорость поглощения удобрений
         self.edibility: bool    #Съедобность
+        self.water_accumulated = 0 #Накопленная вода для роста
+        #water_consume = 1  #Скорость поглощения воды
+        #manure_consume = 0 #Скорость поглощения удобрений
 
     # Todo: Индикация состояния роста растения
     def grow_plant(self):
-        if self.ripeness < 2:
+        if self.hole.watered_degree >= 1:
+            self.water_accumulated += self.water_consume
+            self.hole.dehydrate()
+        if self.ripeness < 2 and self.water_accumulated >= self.water_to_grow:
             self.ripeness += 1
             self.shape(self.shape_type[self.ripeness])
 
@@ -122,6 +126,10 @@ class Plant(turtle.Turtle):
 
 class Carrot(Plant):
     shape_type = ("carrot_g0.gif", "carrot_g1.gif", "carrot_g2.gif")
+    water_consume = 1  #Скорость поглощения воды
+    manure_consume = 0 #Скорость поглощения удобрений
+    water_to_grow = 3
+    edibility = True
     def __init__(self):
         super(Carrot, self).__init__()
         for item in self.shape_type: self.screen.register_shape(item)
@@ -129,9 +137,9 @@ class Carrot(Plant):
         #self.screen.register_shape("carrot_g1.gif")
         #self.screen.register_shape("carrot_g2.gif")
         self.shape(self.shape_type[0])
-        self.water_consume = 20
-        self.manure_consume = 10
-        self.edibility = True
+        #self.water_consume = 20
+        #self.manure_consume = 10
+
 
 
 
@@ -145,13 +153,11 @@ for hole in hole_list_upper_left_coordinates:
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
-time.sleep(2)
-carrot1.grow_plant()
-time.sleep(2)
-carrot1.grow_plant()
-time.sleep(2)
-carrot1.grow_plant()
-time.sleep(2)
+for i in range(10): hole_list_upper_left[4].water(); time.sleep(0.5)
+for i in range(15):
+    carrot1.grow_plant()
+    time.sleep(0.5)
+
 
 carrot1.reap_plant()
 #hole_list_upper_left[4].clean_hole()
