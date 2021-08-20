@@ -52,7 +52,7 @@ class Hole(turtle.Turtle):
         #self.pencolor("brown")
         self.watered_degree = 0
         self.manure_degree = 0
-        self.plant = None
+        self.plant: Plant
 
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
@@ -89,6 +89,7 @@ class Hole(turtle.Turtle):
         """Метод для посадки растения"""
         self.plant = picked_plant
         self.plant.setposition(self.position())
+        self.plant.hole = self
 
     def clean_hole(self):
         """Очистка лунки"""
@@ -116,6 +117,8 @@ class Plant(turtle.Turtle):
         if self.ripeness < 2 and self.water_accumulated >= self.water_to_grow:
             self.ripeness += 1
             self.shape(self.shape_type[self.ripeness])
+        self.hideturtle()
+        self.showturtle()
 
     def reap_plant(self):
         self.clear()
