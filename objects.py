@@ -112,13 +112,12 @@ class Plant(turtle.Turtle):
     # Todo: Индикация состояния роста растения
     def grow_plant(self):
         if self.hole.watered_degree >= 1:
-            self.water_accumulated += self.water_consume
             self.hole.dehydrate()
+            self.water_accumulated += self.water_consume
+
         if self.ripeness < 2 and self.water_accumulated >= self.water_to_grow:
             self.ripeness += 1
-            self.shape(self.shape_type[self.ripeness])
-        self.hideturtle()
-        self.showturtle()
+        self.shape(self.shape_type[self.ripeness])
 
     def reap_plant(self):
         self.clear()
@@ -153,13 +152,17 @@ hole_list_upper_left = []
 for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
 
+hole_list_upper_left[4].watered_degree = 10
+
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
-for i in range(10): hole_list_upper_left[4].water(); time.sleep(0.5)
+#for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)
+
 for i in range(15):
     carrot1.grow_plant()
-    time.sleep(0.5)
+    print(f"Plant has grown for {i}")
+    time.sleep(2)
 
 
 carrot1.reap_plant()
