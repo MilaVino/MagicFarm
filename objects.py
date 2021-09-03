@@ -1,6 +1,7 @@
 # Здесь список из кортежей - каждый элемент хранит координаты каких-то объектов.
 import turtle
 import time
+from constants import *
 
 screen = turtle.Screen()
 screen.screensize(800, 555)
@@ -117,6 +118,7 @@ class Plant(turtle.Turtle):
 
         if self.ripeness < 2 and self.water_accumulated >= self.water_to_grow:
             self.ripeness += 1
+        self.shape("circle")
         self.shape(self.shape_type[self.ripeness])
 
     def reap_plant(self):
@@ -152,36 +154,44 @@ hole_list_upper_left = []
 for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
 
-hole_list_upper_left[4].watered_degree = 10
+hole_list_upper_left[4].watered_degree = 9
+hole_list_upper_left[4].water()
 
 carrot1 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 
-#for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)
+game_continues = True
+screen.tracer(0)
+screen.update()
+while game_continues:
+    time.sleep(TIME_REFRESH)
 
-for i in range(15):
-    carrot1.grow_plant()
-    print(f"Plant has grown for {i}")
-    time.sleep(2)
 
+    #for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)
 
-carrot1.reap_plant()
-#hole_list_upper_left[4].clean_hole()
+    for i in range(15):
+        carrot1.grow_plant()
+        print(f"Plant has grown for {i}")
+        time.sleep(2)
 
-# for i in range(0,15):
-#     for hole in hole_list_upper_left:
-#         hole.water()
-#         time.sleep(0.05)
-#
-# for i in range(0,15):
-#     for hole in hole_list_upper_left:
-#         hole.fertilize()
-#         time.sleep(0.05)
-#
-# for i in range(0,15):
-#     for hole in hole_list_upper_left:
-#         hole.defertilize()
-#         time.sleep(0.05)
+    carrot1.reap_plant()
+    #hole_list_upper_left[4].clean_hole()
 
+    # for i in range(0,15):
+    #     for hole in hole_list_upper_left:
+    #         hole.water()
+    #         time.sleep(0.05)
+    #
+    # for i in range(0,15):
+    #     for hole in hole_list_upper_left:
+    #         hole.fertilize()
+    #         time.sleep(0.05)
+    #
+    # for i in range(0,15):
+    #     for hole in hole_list_upper_left:
+    #         hole.defertilize()
+    #         time.sleep(0.05)
+
+    screen.update()
 
 screen.mainloop()

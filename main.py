@@ -6,12 +6,16 @@
 # Game Starts here
 import turtle
 
+
 #screen = turtle.Screen()
 #screen.screensize(800, 555)
 #screen.bgpic('Background.png')
 #screen.colormode(255)
 
+
 import objects
+
+
 
 def write_coordinates(X:int, Y:int):
     print((X, Y))
