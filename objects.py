@@ -150,9 +150,6 @@ class Carrot(Plant):
         #self.manure_consume = 10
 
 
-
-
-
 #создаём лунки
 hole_list_upper_left = []
 
