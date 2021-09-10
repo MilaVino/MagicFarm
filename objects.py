@@ -178,7 +178,6 @@ while game_continues:
 
     for i in range(15):
         carrot1.grow_plant()
-        carrot2.grow_plant()
         screen.update()
         print(f"Plant has grown for {i}")
         time.sleep(2)
