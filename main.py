@@ -2,6 +2,7 @@
 # todo 2. set up a set of objects (field, plants, farmer, facilities, tools, enemies, counter)
 # todo 3. create interaction methods
 # todo 4. create interface elements
+# todo 5. create gifs for progress bar and locate near the hole
 
 # Game Starts here
 import turtle

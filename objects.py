@@ -89,7 +89,8 @@ class Hole(turtle.Turtle):
     def plant_plant(self, picked_plant):
         """Метод для посадки растения"""
         self.plant = picked_plant
-        self.plant.setposition(self.position())
+        #self.plant.setposition(self.position())
+        self.plant.setposition(self.xcor()+15,self.ycor(),)
         self.plant.hole = self
 
     def clean_hole(self):
@@ -115,11 +116,15 @@ class Plant(turtle.Turtle):
         if self.hole.watered_degree >= 1:
             self.hole.dehydrate()
             self.water_accumulated += self.water_consume
+            #screen.update()
 
         if self.ripeness < 2 and self.water_accumulated >= self.water_to_grow:
             self.ripeness += 1
-        self.shape("circle")
+        #self.shape("circle")
+        #screen.update()
         self.shape(self.shape_type[self.ripeness])
+        #screen.update()
+
 
     def reap_plant(self):
         self.clear()
@@ -158,7 +163,9 @@ hole_list_upper_left[4].watered_degree = 9
 hole_list_upper_left[4].water()
 
 carrot1 = Carrot()
+carrot2 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
+hole_list_upper_left[2].plant_plant(carrot2)
 
 game_continues = True
 screen.tracer(0)
@@ -171,6 +178,7 @@ while game_continues:
 
     for i in range(15):
         carrot1.grow_plant()
+        screen.update()
         print(f"Plant has grown for {i}")
         time.sleep(2)
 
