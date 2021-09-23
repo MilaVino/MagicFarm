@@ -54,6 +54,8 @@ class Hole(turtle.Turtle):
         self.watered_degree = 0
         self.manure_degree = 0
         self.plant: Plant
+        #-Test water indicator
+        self.indicator: WaterIndicator
 
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
@@ -92,6 +94,13 @@ class Hole(turtle.Turtle):
         #self.plant.setposition(self.position())
         self.plant.setposition(self.xcor()+15,self.ycor(),)
         self.plant.hole = self
+
+    #test
+    def hole_indicator(self,indicator_type):
+        """Метод для отображения индикатора"""
+        self.indicator = indicator_type
+        self.indicator.setposition(self.xcor() - 15, self.ycor(), )
+        self.indicator.hole = self
 
     def clean_hole(self):
         """Очистка лунки"""
@@ -149,12 +158,30 @@ class Carrot(Plant):
         #self.water_consume = 20
         #self.manure_consume = 10
 
+class WaterIndicator(Plant):
+    shape_type_WaterIndicator = ("indicatorBlueTransp0.gif", "indicatorBlueTransp1.gif", "indicatorBlueTransp2.gif", "indicatorBlueTransp3.gif")
+    def __init__(self):
+        super(WaterIndicator, self).__init__()
+        for item in self.shape_type_WaterIndicator: self.screen.register_shape(item)
+        self.shape(self.shape_type_WaterIndicator[1])
+
+    def water_indicator_status(self, water_degree):
+        if water_degree == 0:
+            self.shape(self.shape_type_WaterIndicator[0])
+        if water_degree > 5:
+            self.shape(self.shape_type_WaterIndicator[3])
+
+
+
 
 #создаём лунки
 hole_list_upper_left = []
 
 for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
+
+indicator1 = WaterIndicator()
+hole_list_upper_left[4].hole_indicator(indicator1)
 
 hole_list_upper_left[4].watered_degree = 9
 hole_list_upper_left[4].water()
@@ -163,6 +190,8 @@ carrot1 = Carrot()
 carrot2 = Carrot()
 hole_list_upper_left[4].plant_plant(carrot1)
 hole_list_upper_left[2].plant_plant(carrot2)
+
+
 
 game_continues = True
 screen.tracer(0)
@@ -175,6 +204,7 @@ while game_continues:
 
     for i in range(15):
         carrot1.grow_plant()
+        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
         screen.update()
         print(f"Plant has grown for {i}")
         time.sleep(2)
