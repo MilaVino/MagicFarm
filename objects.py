@@ -55,22 +55,24 @@ class Hole(turtle.Turtle):
         self.manure_degree = 0
         self.plant: Plant
         #-Test water indicator
-        self.indicator: WaterIndicator
+        self.indicator = WaterIndicator()
 
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
         #Здесь надо сделать проверку на текущее значение <10 - иначе ничего не поливаем
         if self.watered_degree < 10:
             self.watered_degree += 1
-            self.color(0, 0, self.watered_degree * 25)
-            self.pencolor("brown")
+            self.indicator.water_indicator_status(self.watered_degree)
+#            self.color(0, 0, self.watered_degree * 25)
+#            self.pencolor("brown")
 
     #метод для высушивания лунки (один вызов метода -10%)
     def dehydrate(self):
         #Здесь надо сделать проверку на текущее значение <10 - иначе ничего не поливаем
         if self.watered_degree > 0 :
             self.watered_degree -= 1
-            self.color(0, 0, self.watered_degree * 25)
+            self.indicator.water_indicator_status(self.watered_degree)
+#            self.color(0, 0, self.watered_degree * 25)
 
     #метод для удобрения лунки (один вызов метода +1)
     def fertilize(self):
@@ -180,8 +182,8 @@ hole_list_upper_left = []
 for hole in hole_list_upper_left_coordinates:
     hole_list_upper_left.append(Hole(hole[0],hole[1]))
 
-indicator1 = WaterIndicator()
-hole_list_upper_left[4].hole_indicator(indicator1)
+#indicator1 = WaterIndicator()
+#hole_list_upper_left[4].hole_indicator(indicator1)
 
 hole_list_upper_left[4].watered_degree = 9
 hole_list_upper_left[4].water()
@@ -204,7 +206,7 @@ while game_continues:
 
     for i in range(15):
         carrot1.grow_plant()
-        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
+#        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
         screen.update()
         print(f"Plant has grown for {i}")
         time.sleep(2)
