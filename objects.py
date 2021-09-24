@@ -153,9 +153,6 @@ class Carrot(Plant):
     def __init__(self):
         super(Carrot, self).__init__()
         for item in self.shape_type: self.screen.register_shape(item)
-        #self.screen.register_shape("carrot_g0.gif")
-        #self.screen.register_shape("carrot_g1.gif")
-        #self.screen.register_shape("carrot_g2.gif")
         self.shape(self.shape_type[0])
         #self.water_consume = 20
         #self.manure_consume = 10
