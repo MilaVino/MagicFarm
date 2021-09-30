@@ -56,6 +56,7 @@ class Hole(turtle.Turtle):
         self.plant: Plant
         #-Test water indicator
         self.indicator = WaterIndicator()
+        self.indicator.setposition(x-15,y)
 
     #метод для поливки лунки (один вызов метода +10%)
     def water(self):
@@ -167,8 +168,16 @@ class WaterIndicator(Plant):
     def water_indicator_status(self, water_degree):
         if water_degree == 0:
             self.shape(self.shape_type_WaterIndicator[0])
-        if water_degree > 5:
+        if water_degree > 0:
+            self.shape(self.shape_type_WaterIndicator[1])
+        if water_degree > 3:
+            self.shape(self.shape_type_WaterIndicator[2])
+        if water_degree > 6:
             self.shape(self.shape_type_WaterIndicator[3])
+
+
+screen.tracer(0)
+screen.update()
 
 
 
@@ -193,8 +202,8 @@ hole_list_upper_left[2].plant_plant(carrot2)
 
 
 game_continues = True
-screen.tracer(0)
-screen.update()
+#screen.tracer(0)
+#screen.update()
 while game_continues:
     time.sleep(TIME_REFRESH)
 
