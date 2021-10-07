@@ -3,15 +3,20 @@
 # todo 3. create interaction methods
 # todo 4. create interface elements
 # todo 5. create gifs for progress bar and locate near the hole
+# todo 7.Добавить к игре функции полива на левую кнопку мыши и посадки/сбора урожая на правую.
+# todo 8.На раунд даётся фиксированное количество времени (минута, например). Цель -- набрать максимальное число очков.
+# todo 9.Очки начисляются за собранные морковки, чем она спелее, тем лучше.
+#        После максимальной спелости морковка начинает сохнуть, и число очков за неё уменьшается.
+
 
 # Game Starts here
 import turtle
 
 
-#screen = turtle.Screen()
-#screen.screensize(800, 555)
-#screen.bgpic('Background.png')
-#screen.colormode(255)
+screen = turtle.Screen()
+screen.screensize(800, 555)
+screen.bgpic('Background.png')
+screen.colormode(255)
 
 
 import objects
@@ -21,11 +26,11 @@ import objects
 def write_coordinates(X:int, Y:int):
     print((X, Y))
 
-#screen.onclick(write_coordinates)
+screen.onclick(write_coordinates)
 
 
 #mainloop - должен быть последним!
-#screen.mainloop()
+screen.mainloop()
 
 #screen.listen()
 #turtle_tom = TurtleParent(pos_x=-60, pos_y=-60, t_color="grey")

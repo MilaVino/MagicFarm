@@ -201,7 +201,7 @@ hole_list_upper_left[2].plant_plant(carrot2)
 
 
 
-game_continues = True
+game_continues = False
 #screen.tracer(0)
 #screen.update()
 while game_continues:
