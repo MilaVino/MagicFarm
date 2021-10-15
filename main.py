@@ -16,6 +16,7 @@
 # Game Starts here
 import turtle
 from objects import *
+from constants import *
 
 
 screen = turtle.Screen()
@@ -72,8 +73,15 @@ screen.update()
 def plant_carrot(X:int, Y:int):
     """ Функция посадки моркови """
 # Функция принимает координаты щелчка по экрану и проверяет их с областью лунки, устанавливает лунку для посадки и сажает в неё мокровку
+    mouse_clicked = (X, Y)
+    min_distance_to_hole:int = 1000000
+    hole_selected: Hole
+    for hole in hole_list_all:
+        current_distance = hole.distance(mouse_clicked)
+        if current_distance < min_distance_to_hole: min_distance_to_hole = current_distance; hole_selected = hole
 
-
+    if hole_selected.distance(mouse_clicked) <= HOLE_HIT_RADIUS:
+        print(hole_selected.position())
 
 screen.onclick(plant_carrot)
 
