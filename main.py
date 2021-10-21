@@ -61,12 +61,12 @@ for hole in hole_list_upper_left_coordinates: hole_list_all.append(Hole(hole[0],
 for hole in hole_list_bottom_left_coordinates: hole_list_all.append(Hole(hole[0], hole[1]))
 for hole in hole_list_right_coordinates: hole_list_all.append(Hole(hole[0], hole[1]))
 
-for i in range(10): hole_list_all[4].water(); time.sleep(1); screen.update()
+# for i in range(10): hole_list_all[4].water(); time.sleep(1); screen.update()
 
-carrot1 = Carrot()
-carrot2 = Carrot()
-hole_list_all[4].plant_plant(carrot1)
-hole_list_all[2].plant_plant(carrot2)
+# carrot1 = Carrot()
+# carrot2 = Carrot()
+# hole_list_all[4].plant_plant(carrot1)
+# hole_list_all[2].plant_plant(carrot2)
 
 screen.update()
 
@@ -81,26 +81,32 @@ def plant_carrot(X:int, Y:int):
         if current_distance < min_distance_to_hole: min_distance_to_hole = current_distance; hole_selected = hole
 
     if hole_selected.distance(mouse_clicked) <= HOLE_HIT_RADIUS:
-        print(hole_selected.position())
+        if not hole_selected.plant:
+            hole_selected.plant_plant(Carrot())
+            print(hole_selected.position())
+        else:
+            print(f"Hole {hole_selected} is busy")
+
+        # print(hole_selected.plant)
 
 screen.onclick(plant_carrot)
 
 
-game_continues = False
+game_continues = True
 while game_continues:
     time.sleep(TIME_REFRESH)
 
 
     #for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)
 
-    for i in range(15):
-        carrot1.grow_plant()
-#        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
-        screen.update()
-        print(f"Plant has grown for {i}")
-        time.sleep(2)
+#     for i in range(15):
+#         carrot1.grow_plant()
+# #        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
+#         screen.update()
+#         print(f"Plant has grown for {i}")
+#         time.sleep(2)
 
-    carrot1.reap_plant()
+    # carrot1.reap_plant()
     #hole_list_upper_left[4].clean_hole()
 
     # for i in range(0,15):

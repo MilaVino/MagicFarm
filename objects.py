@@ -53,7 +53,7 @@ class Hole(turtle.Turtle):
         #self.pencolor("brown")
         self.watered_degree = 0
         self.manure_degree = 0
-        self.plant: Plant
+        self.plant: Plant = None
         #-Test water indicator
         self.indicator = WaterIndicator()
         self.indicator.setposition(x-15,y)
@@ -164,7 +164,7 @@ class WaterIndicator(Plant):
     def __init__(self):
         super(WaterIndicator, self).__init__()
         for item in self.shape_type_WaterIndicator: self.screen.register_shape(item)
-        self.shape(self.shape_type_WaterIndicator[1])
+        self.shape(self.shape_type_WaterIndicator[0])
 
     def water_indicator_status(self, water_degree):
         if water_degree == 0:
