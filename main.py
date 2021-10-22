@@ -17,6 +17,7 @@
 import turtle
 from objects import *
 from constants import *
+import random
 
 
 screen = turtle.Screen()
@@ -85,16 +86,37 @@ def plant_carrot(X:int, Y:int):
             hole_selected.plant_plant(Carrot())
             print(hole_selected.position())
         else:
-            print(f"Hole {hole_selected} is busy")
+            hole_selected.plant.reap_plant()
+            hole_selected.clean_hole()
+            # print(f"Hole {hole_selected} is busy")
 
         # print(hole_selected.plant)
 
-screen.onclick(plant_carrot)
+def plant_water(X:int, Y:int):
+    """ Функция полива лунки """
+# Функция принимает координаты щелчка по экрану и проверяет их с областью лунки, устанавливает лунку для полива и увеличивает уровень
+    mouse_clicked = (X, Y)
+    min_distance_to_hole:int = 1000000
+    hole_selected: Hole
+    for hole in hole_list_all:
+        current_distance = hole.distance(mouse_clicked)
+        if current_distance < min_distance_to_hole: min_distance_to_hole = current_distance; hole_selected = hole
 
+    if hole_selected.distance(mouse_clicked) <= HOLE_HIT_RADIUS:
+        hole_selected.water()
+        # print(hole_selected.plant)
+
+
+screen.onclick(plant_carrot, btn=1)
+screen.onclick(plant_water, btn=3)
 
 game_continues = True
 while game_continues:
     time.sleep(TIME_REFRESH)
+    for hole in hole_list_all:
+        if hole.plant:
+            if random.randint(0, 10) == 5:
+                hole.plant.grow_plant()
 
 
     #for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)

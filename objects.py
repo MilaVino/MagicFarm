@@ -108,9 +108,9 @@ class Hole(turtle.Turtle):
 
     def clean_hole(self):
         """Очистка лунки"""
-        #del self.plant
-        #self.plant = None
-        print("test")
+        del self.plant
+        self.plant = None
+        print(f"Hole {self} cleared!")
 
 class Plant(turtle.Turtle):
     def __init__(self):
