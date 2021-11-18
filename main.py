@@ -14,7 +14,7 @@
 
 
 # Game Starts here
-import turtle
+# import turtle
 from objects import *
 from constants import *
 import random
@@ -24,6 +24,14 @@ screen = turtle.Screen()
 screen.screensize(800, 555)
 screen.bgpic('Background.png')
 screen.colormode(255)
+
+time_remaining = TIME_GAME
+score = turtle.Turtle()
+score.hideturtle()
+score.penup()
+score.setposition(0, 400)
+score.write(f"Счёт: 0, осталось времени - {round(time_remaining,1)}")
+
 
 def write_coordinates(X:int, Y:int):
     print((X, Y))
@@ -112,50 +120,32 @@ def plant_water(X:int, Y:int):
 screen.onclick(plant_carrot, btn=1)
 screen.onclick(plant_water, btn=3)
 
-game_continues = True
-reap_plant_counter = 0;
+big_game_continues = True
 
-while game_continues:
-    time.sleep(TIME_REFRESH)
-    for hole in hole_list_all:
-        if hole.plant:
-            if random.randint(0, 20) == 5:
-                hole.plant.grow_plant()
+while big_game_continues:
+
+    game_continues = True
+    reap_plant_counter = 0;
+
+    while game_continues:
+        score.clear()
+        score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 12, "bold"))
+        time.sleep(TIME_REFRESH)
+        time_remaining -= TIME_REFRESH
+        if time_remaining <= 0: break
+        for hole in hole_list_all:
+            if hole.plant:
+                if random.randint(0, 20) == 5:
+                    hole.plant.grow_plant()
 
 
-    #for i in range(1): hole_list_upper_left[4].water(); time.sleep(0.5)
 
-#     for i in range(15):
-#         carrot1.grow_plant()
-# #        indicator1.water_indicator_status(hole_list_upper_left[4].watered_degree)
-#         screen.update()
-#         print(f"Plant has grown for {i}")
-#         time.sleep(2)
 
-    # carrot1.reap_plant()
-    #hole_list_upper_left[4].clean_hole()
+        screen.update()
 
-    # for i in range(0,15):
-    #     for hole in hole_list_upper_left:
-    #         hole.water()
-    #         time.sleep(0.05)
-    #
-    # for i in range(0,15):
-    #     for hole in hole_list_upper_left:
-    #         hole.fertilize()
-    #         time.sleep(0.05)
-    #
-    # for i in range(0,15):
-    #     for hole in hole_list_upper_left:
-    #         hole.defertilize()
-    #         time.sleep(0.05)
-
+    score.clear()
+    score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R, чтобы начать заново.", align="center", font=("Arial", 16, "bold"))
     screen.update()
-
-
-
-
-
 
 
 
