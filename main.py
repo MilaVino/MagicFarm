@@ -83,8 +83,10 @@ screen.update()
 def restart_game():
     global game_continues
     global time_remaining
+    # global reap_plant_counter
     game_continues = True
     time_remaining = TIME_GAME
+    # reap_plant_counter = 0
 
 def plant_carrot(X:int, Y:int, self=None):
     """ Функция посадки моркови """
@@ -133,29 +135,26 @@ screen.onkey(key="r", fun=restart_game)
 
 
 big_game_continues = True
-# global game_continues
 game_continues = True
+reap_plant_counter = 0
 
 while big_game_continues:
-
-    reap_plant_counter = 0;
 
     while game_continues:
         score.clear()
         score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 12, "bold"))
         time.sleep(TIME_REFRESH)
         time_remaining -= TIME_REFRESH
-        if time_remaining <= 0: game_continues = False
+        if time_remaining <= 0:
+            game_continues = False
+            break
 
         for hole in hole_list_all:
             if hole.plant:
                 if random.randint(0, 20) == 5:
                     hole.plant.grow_plant()
 
-
-
-
-    screen.update()
+        screen.update()
 
     score.clear()
     score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R - начать заново, C - продолжить раунд, Q - выход.", align="center", font=("Arial", 12, "bold"))
