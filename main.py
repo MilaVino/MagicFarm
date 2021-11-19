@@ -79,6 +79,10 @@ for hole in hole_list_right_coordinates: hole_list_all.append(Hole(hole[0], hole
 
 screen.update()
 
+def restart_game():
+    game_continues = True
+    time_remaining = TIME_GAME
+
 def plant_carrot(X:int, Y:int, self=None):
     """ Функция посадки моркови """
 # Функция принимает координаты щелчка по экрану и проверяет их с областью лунки, устанавливает лунку для посадки и сажает в неё мокровку
@@ -120,19 +124,24 @@ def plant_water(X:int, Y:int):
 screen.onclick(plant_carrot, btn=1)
 screen.onclick(plant_water, btn=3)
 
+screen.onkey(restart_game, "R")
+screen.onkey(restart_game, "r")
+
 big_game_continues = True
+global game_continues
+game_continues = True
 
 while big_game_continues:
 
-    game_continues = True
     reap_plant_counter = 0;
 
     while game_continues:
         score.clear()
-        score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 12, "bold"))
+        score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 10, "bold"))
         time.sleep(TIME_REFRESH)
         time_remaining -= TIME_REFRESH
         if time_remaining <= 0: break
+
         for hole in hole_list_all:
             if hole.plant:
                 if random.randint(0, 20) == 5:
@@ -141,10 +150,12 @@ while big_game_continues:
 
 
 
-        screen.update()
+    screen.update()
 
+    game_continues = False
     score.clear()
-    score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R, чтобы начать заново.", align="center", font=("Arial", 16, "bold"))
+    score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R - начать заново, C - продолжить раунд, Q - выход.", align="center", font=("Arial", 16, "bold"))
+    time.sleep(TIME_REFRESH)
     screen.update()
 
 
