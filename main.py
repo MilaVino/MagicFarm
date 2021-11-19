@@ -21,6 +21,7 @@ import random
 
 
 screen = turtle.Screen()
+screen.listen()
 screen.screensize(800, 555)
 screen.bgpic('Background.png')
 screen.colormode(255)
@@ -80,6 +81,8 @@ for hole in hole_list_right_coordinates: hole_list_all.append(Hole(hole[0], hole
 screen.update()
 
 def restart_game():
+    global game_continues
+    global time_remaining
     game_continues = True
     time_remaining = TIME_GAME
 
@@ -124,11 +127,13 @@ def plant_water(X:int, Y:int):
 screen.onclick(plant_carrot, btn=1)
 screen.onclick(plant_water, btn=3)
 
-screen.onkey(restart_game, "R")
-screen.onkey(restart_game, "r")
+screen.onkey(key="R", fun=restart_game)
+screen.onkey(key="r", fun=restart_game)
+# screen.listen()
+
 
 big_game_continues = True
-global game_continues
+# global game_continues
 game_continues = True
 
 while big_game_continues:
@@ -137,10 +142,10 @@ while big_game_continues:
 
     while game_continues:
         score.clear()
-        score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 10, "bold"))
+        score.write(f"Счёт: {reap_plant_counter}, осталось времени - {round(time_remaining,1)}", align="center", font=("Arial", 12, "bold"))
         time.sleep(TIME_REFRESH)
         time_remaining -= TIME_REFRESH
-        if time_remaining <= 0: break
+        if time_remaining <= 0: game_continues = False
 
         for hole in hole_list_all:
             if hole.plant:
@@ -152,9 +157,8 @@ while big_game_continues:
 
     screen.update()
 
-    game_continues = False
     score.clear()
-    score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R - начать заново, C - продолжить раунд, Q - выход.", align="center", font=("Arial", 16, "bold"))
+    score.write(f"Игра завершена. Вы набрали {reap_plant_counter} очков! Нажмите R - начать заново, C - продолжить раунд, Q - выход.", align="center", font=("Arial", 12, "bold"))
     time.sleep(TIME_REFRESH)
     screen.update()
 
