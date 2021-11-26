@@ -166,9 +166,3 @@ while big_game_continues:
 #mainloop - должен быть последним!
 screen.mainloop()
 
-#screen.listen()
-#turtle_tom = TurtleParent(pos_x=-60, pos_y=-60, t_color="grey")
-#turtle_tom.chaser = True
-#turtle_jerry = TurtleParent(pos_x=60, pos_y=60, t_color="purple")
-#turtle_tuffy = TurtleParent(pos_x=-100, pos_y=230, t_color="black")
-#turtle_tuffy.hideturtle()
